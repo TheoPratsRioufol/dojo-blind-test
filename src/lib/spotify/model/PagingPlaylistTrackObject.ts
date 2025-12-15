@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { PlaylistTrackObject } from "./PlaylistTrackObject";
 
-
-export type PagingPlaylistTrackObject = object;
+export type PagingPlaylistTrackObject = PagingObject & {
+};

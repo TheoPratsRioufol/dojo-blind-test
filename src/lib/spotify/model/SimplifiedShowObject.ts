@@ -1,3 +1,3 @@
+import { ShowBase } from "./ShowBase";
 
-
-export type SimplifiedShowObject = ;
+export type SimplifiedShowObject = ShowBase;

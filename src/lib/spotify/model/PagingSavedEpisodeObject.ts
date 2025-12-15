@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { SavedEpisodeObject } from "./SavedEpisodeObject";
 
-
-export type PagingSavedEpisodeObject = object;
+export type PagingSavedEpisodeObject = PagingObject & {
+};

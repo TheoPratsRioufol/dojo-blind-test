@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { SimplifiedEpisodeObject } from "./SimplifiedEpisodeObject";
 
-
-export type PagingSimplifiedEpisodeObject = object;
+export type PagingSimplifiedEpisodeObject = PagingObject & {
+};

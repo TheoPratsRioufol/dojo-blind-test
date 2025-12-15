@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { SimplifiedAlbumObject } from "./SimplifiedAlbumObject";
 
-
-export type PagingSimplifiedAlbumObject = object;
+export type PagingSimplifiedAlbumObject = PagingObject & {
+};

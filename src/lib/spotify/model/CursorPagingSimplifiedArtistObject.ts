@@ -1,3 +1,5 @@
+import { CursorPagingObject } from "./CursorPagingObject";
+import { ArtistObject } from "./ArtistObject";
 
-
-export type CursorPagingSimplifiedArtistObject = object;
+export type CursorPagingSimplifiedArtistObject = CursorPagingObject & {
+};

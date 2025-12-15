@@ -1,9 +1,5 @@
-
+import { CursorObject } from "./CursorObject";
 
 export type CursorPagingObject = {
-  href?: string,
-  limit?: number,
-  next?: string,
-  cursors?: ,
-  total?: number,
+  cursors?: CursorObject,
 };

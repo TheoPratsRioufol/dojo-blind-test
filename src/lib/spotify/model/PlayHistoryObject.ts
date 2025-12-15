@@ -1,7 +1,7 @@
-
+import { TrackObject } from "./TrackObject";
+import { ContextObject } from "./ContextObject";
 
 export type PlayHistoryObject = {
-  track?: ,
-  played_at?: string,
-  context?: ,
+  track?: TrackObject,
+  context?: ContextObject,
 };

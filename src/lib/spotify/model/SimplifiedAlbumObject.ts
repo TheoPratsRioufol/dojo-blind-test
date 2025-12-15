@@ -1,3 +1,5 @@
+import { AlbumBase } from "./AlbumBase";
+import { SimplifiedArtistObject } from "./SimplifiedArtistObject";
 
-
-export type SimplifiedAlbumObject = ;
+export type SimplifiedAlbumObject = AlbumBase & {
+};

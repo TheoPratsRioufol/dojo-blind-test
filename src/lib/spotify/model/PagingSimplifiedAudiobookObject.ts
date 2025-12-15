@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { SimplifiedAudiobookObject } from "./SimplifiedAudiobookObject";
 
-
-export type PagingSimplifiedAudiobookObject = object;
+export type PagingSimplifiedAudiobookObject = PagingObject & {
+};

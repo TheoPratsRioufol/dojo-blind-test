@@ -1,25 +1,11 @@
-import { E } from "./E";
-import { p } from "./p";
-import { i } from "./i";
-import { s } from "./s";
-import { o } from "./o";
-import { d } from "./d";
-import { e } from "./e";
-import { O } from "./O";
-import { b } from "./b";
-import { j } from "./j";
-import { c } from "./c";
-import { t } from "./t";
+import { DeviceObject } from "./DeviceObject";
+import { ContextObject } from "./ContextObject";
+import { TrackObject } from "./TrackObject";
+import { EpisodeObject } from "./EpisodeObject";
+import { DisallowsObject } from "./DisallowsObject";
 
 export type CurrentlyPlayingContextObject = {
-  device?: ,
-  repeat_state?: string,
-  shuffle_state?: boolean,
-  context?: ,
-  timestamp?: number,
-  progress_ms?: number,
-  is_playing?: boolean,
-  item?: TrackObject,
-  currently_playing_type?: string,
-  actions?: ,
+  device?: DeviceObject,
+  context?: ContextObject,
+  actions?: DisallowsObject,
 };

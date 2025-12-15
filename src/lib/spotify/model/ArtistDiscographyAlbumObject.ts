@@ -1,3 +1,4 @@
+import { SimplifiedAlbumObject } from "./SimplifiedAlbumObject";
 
-
-export type ArtistDiscographyAlbumObject = ;
+export type ArtistDiscographyAlbumObject = SimplifiedAlbumObject & {
+};

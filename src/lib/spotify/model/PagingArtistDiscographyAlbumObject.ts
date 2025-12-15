@@ -1,3 +1,5 @@
+import { PagingObject } from "./PagingObject";
+import { ArtistDiscographyAlbumObject } from "./ArtistDiscographyAlbumObject";
 
-
-export type PagingArtistDiscographyAlbumObject = object;
+export type PagingArtistDiscographyAlbumObject = PagingObject & {
+};

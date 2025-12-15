@@ -1,3 +1,5 @@
+import { CursorPagingObject } from "./CursorPagingObject";
+import { PlayHistoryObject } from "./PlayHistoryObject";
 
-
-export type CursorPagingPlayHistoryObject = object;
+export type CursorPagingPlayHistoryObject = CursorPagingObject & {
+};

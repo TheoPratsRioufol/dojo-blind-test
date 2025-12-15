@@ -1,3 +1,3 @@
+import { AudiobookBase } from "./AudiobookBase";
 
-
-export type SimplifiedAudiobookObject = ;
+export type SimplifiedAudiobookObject = AudiobookBase;

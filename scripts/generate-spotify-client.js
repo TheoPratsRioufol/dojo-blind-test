@@ -39,24 +39,32 @@ function getGeneratedType(typeSchema) {
 
   if (typeSchema.$ref != undefined) {
     // Handle Reference
-    console.log("REFERENCE")
     let ptype = typeSchema["$ref"].split("/").at(-1)
     localTypeToImports.add(ptype)
-    return [`${ptype}[]`, localTypeToImports]
+    return [`${ptype}`, localTypeToImports]
   }
 
   if (typeSchema.oneOf != undefined) {
     // Handle oneOff type
-    console.log("ONE OFF")
+    //console.log("ONE OFF", typeSchema.oneOf)
     let oflist = new Array()
-    for (const oneOfType of typeSchema.oneOf) {
-      const [ptype2, tti] = getGeneratedType(oneOfType)
-      oflist.push(ptype2)
-      localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+      for (const oneOfType of typeSchema.oneOf) {
+        const [ptype2, tti] = getGeneratedType(oneOfType)
+        oflist.push(ptype2)
+        localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
       }
-      console.log("Return:","("+oflist.join(" | ")+")")
-      return "("+oflist.join(" | ")+")", localTypeToImports
+    return ["("+oflist.join(" | ")+")", localTypeToImports]
+  }
+
+  if (typeSchema.allOf != undefined) {
+    let alllist = new Array()
+    for (const allOfType of typeSchema.allOf) {
+      const [ptype2, tti] = getGeneratedType(allOfType)
+      localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+      alllist.push(ptype2)
     }
+    return [alllist.join(" & "), localTypeToImports]
+  }
 
 
   // TO DO: Generate typescript code from schema
@@ -75,7 +83,8 @@ function getGeneratedType(typeSchema) {
 
     case "array":
       const [ptype, tti] = getGeneratedType(typeSchema.items)
-      return [`${ptype}[]`, tti]
+      localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+      return [`${ptype}[]`, localTypeToImports]
 
     case "object":
       if (Object.hasOwn(typeSchema, "properties")) {
@@ -84,9 +93,12 @@ function getGeneratedType(typeSchema) {
         for (const propType of Object.keys(typeSchema.properties)) {
           // Test if the field is required
           requiredF = (typeSchema.required != undefined) && typeSchema.required.includes(propType) ? "" : "?"
+          //console.log(propType,"-->",typeSchema.properties[propType])
           const [ptype, tti] = getGeneratedType(typeSchema.properties[propType])
           localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
-          out += `  ${propType}${requiredF}: ${ptype},\n`
+          if (typeSchema.properties[propType].allOf != undefined) {
+            out += `  ${propType}${requiredF}: ${ptype},\n`
+          }
         }
         out += "}"
         return [out, localTypeToImports]

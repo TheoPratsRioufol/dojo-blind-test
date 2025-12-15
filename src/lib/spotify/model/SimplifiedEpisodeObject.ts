@@ -1,3 +1,3 @@
+import { EpisodeBase } from "./EpisodeBase";
 
-
-export type SimplifiedEpisodeObject = object;
+export type SimplifiedEpisodeObject = EpisodeBase;

@@ -1,3 +1,3 @@
+import { ChapterBase } from "./ChapterBase";
 
-
-export type SimplifiedChapterObject = object;
+export type SimplifiedChapterObject = ChapterBase;
