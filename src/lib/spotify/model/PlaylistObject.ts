@@ -1,1 +1,16 @@
-export type PlaylistObject = ;
+export type PlaylistObject = {
+  collaborative?: boolean,
+  description?: string,
+  external_urls?: ,
+  followers?: ,
+  href?: string,
+  id?: string,
+  images?: object,
+  name?: string,
+  owner?: ,
+  public?: boolean,
+  snapshot_id?: string,
+  tracks?: object,
+  type?: string,
+  uri?: string,
+};

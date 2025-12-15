@@ -1,1 +1,19 @@
-export type ShowBase = ;
+export type ShowBase = {
+  available_markets: object,
+  copyrights: object,
+  description: string,
+  html_description: string,
+  explicit: boolean,
+  external_urls: ,
+  href: string,
+  id: string,
+  images: object,
+  is_externally_hosted: boolean,
+  languages: object,
+  media_type: string,
+  name: string,
+  publisher: string,
+  type: string,
+  uri: string,
+  total_episodes: number,
+};

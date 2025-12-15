@@ -38,11 +38,27 @@ function getGeneratedType(typeSchema) {
   // TO DO: Generate typescript code from schema
   switch (schemaType) {
     case "number":
+      return "number"
     case "integer":
+      return "number"
     case "string":
+      return "string"
     case "boolean":
+      return "boolean"
     case "array":
     case "object":
+      if (Object.hasOwn(typeSchema, "properties")) {
+        let out = "{\n"
+        let requiredF = ""
+        for (const propType of Object.keys(typeSchema.properties)) {
+          // Test if field if required
+          requiredF = (typeSchema.required != undefined) && typeSchema.required.includes(propType) ? "" : "?"
+          out += `  ${propType}${requiredF}: ${getGeneratedType(typeSchema.properties[propType])},\n`
+        }
+        out += "}"
+        return out
+      }
+      return "object"
     default:
       return "";
   }
