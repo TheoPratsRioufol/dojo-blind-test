@@ -1,4 +1,4 @@
-
+import { ImageObject } from "./ImageObject";
 
 export type SimplifiedPlaylistObject = {
   collaborative?: boolean,
@@ -6,7 +6,7 @@ export type SimplifiedPlaylistObject = {
   external_urls?: ,
   href?: string,
   id?: string,
-  images?: ,
+  images?: ImageObject[],
   name?: string,
   owner?: ,
   public?: boolean,

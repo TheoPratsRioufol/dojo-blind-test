@@ -1,11 +1,4 @@
+import { TrackObject } from "./TrackObject";
+import { EpisodeObject } from "./EpisodeObject";
 
-
-export type CurrentlyPlayingObject = {
-  context?: ,
-  timestamp?: number,
-  progress_ms?: number,
-  is_playing?: boolean,
-  item?: ,
-  currently_playing_type?: string,
-  actions?: ,
-};
+export type CurrentlyPlayingObject = (TrackObject | EpisodeObject);

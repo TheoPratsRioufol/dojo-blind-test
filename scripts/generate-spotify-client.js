@@ -51,6 +51,12 @@ function getGeneratedType(typeSchema) {
       return ["boolean", localTypeToImports]
 
     case "array":
+      if (typeSchema.items['type'] != undefined) {
+        return [`${typeSchema.items.type}[]`, localTypeToImports]
+      } else if (typeSchema.items['$ref'] != undefined) {
+        let ptype = typeSchema.items["$ref"].split("/").at(-1)
+        return [`${ptype}[]`, new Set([ptype])]
+      }
       return ["", localTypeToImports]
 
     case "object":
@@ -61,10 +67,27 @@ function getGeneratedType(typeSchema) {
         for (const propType of Object.keys(typeSchema.properties)) {
           // Test if the field is required
           requiredF = (typeSchema.required != undefined) && typeSchema.required.includes(propType) ? "" : "?"
-          // Test if the type if referenced to another
+          
           if (typeSchema.properties[propType]["$ref"] != undefined) {
+            // Test if the type if referenced to another
             ptype = typeSchema.properties[propType]["$ref"].split("/").at(-1)
             localTypeToImports.add(ptype)
+          } else if (Object.hasOwn(typeSchema.properties[propType], "oneOf")) {
+            // Check for Type Union
+            let oflist = new Array()
+            for (const oneOfType of typeSchema.properties[propType].oneOf) {
+              console.log(oneOfType)
+              if (oneOfType["$ref"] != undefined) {
+                ptype = oneOfType["$ref"].split("/").at(-1)
+                oflist.push(ptype)
+                localTypeToImports.add(ptype)
+              } else {
+                const [ptype2, tti] = getGeneratedType(oneOfType)
+                oflist.push(ptype2)
+                localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+              }
+            }
+            return ["("+oflist.join(" | ")+")", localTypeToImports]
           } else {
             let [ptype2, tti] = getGeneratedType(typeSchema.properties[propType])
             ptype = ptype2
@@ -77,6 +100,7 @@ function getGeneratedType(typeSchema) {
         out += "}"
         return [out, localTypeToImports]
       }
+
       return ["object", localTypeToImports]
 
     default:

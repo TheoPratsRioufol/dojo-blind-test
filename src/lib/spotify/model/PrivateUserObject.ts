@@ -1,4 +1,4 @@
-
+import { ImageObject } from "./ImageObject";
 
 export type PrivateUserObject = {
   country?: string,
@@ -9,7 +9,7 @@ export type PrivateUserObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: ,
+  images?: ImageObject[],
   product?: string,
   type?: string,
   uri?: string,

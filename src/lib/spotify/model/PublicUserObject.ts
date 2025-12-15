@@ -1,4 +1,4 @@
-
+import { ImageObject } from "./ImageObject";
 
 export type PublicUserObject = {
   display_name?: string,
@@ -6,7 +6,7 @@ export type PublicUserObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: ,
+  images?: ImageObject[],
   type?: string,
   uri?: string,
 };
