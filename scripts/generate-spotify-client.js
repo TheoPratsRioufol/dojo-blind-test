@@ -76,6 +76,9 @@ function getGeneratedType(typeSchema) {
       return ["number", localTypeToImports]
 
     case "string":
+      if (typeSchema.enum != undefined) {
+        return [Array.from(typeSchema.enum).map((key) => `"${key}"`).join(' | '), localTypeToImports]
+      }
       return ["string", localTypeToImports]
 
     case "boolean":
@@ -96,9 +99,7 @@ function getGeneratedType(typeSchema) {
           //console.log(propType,"-->",typeSchema.properties[propType])
           const [ptype, tti] = getGeneratedType(typeSchema.properties[propType])
           localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
-          if (typeSchema.properties[propType].allOf != undefined) {
-            out += `  ${propType}${requiredF}: ${ptype},\n`
-          }
+          out += `  ${propType}${requiredF}: ${ptype},\n`
         }
         out += "}"
         return [out, localTypeToImports]
