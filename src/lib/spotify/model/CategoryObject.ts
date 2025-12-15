@@ -1,6 +1,8 @@
+
+
 export type CategoryObject = {
   href: string,
-  icons: object,
+  icons: ,
   id: string,
   name: string,
 };

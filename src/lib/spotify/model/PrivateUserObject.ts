@@ -1,3 +1,5 @@
+
+
 export type PrivateUserObject = {
   country?: string,
   display_name?: string,
@@ -7,7 +9,7 @@ export type PrivateUserObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: object,
+  images?: ,
   product?: string,
   type?: string,
   uri?: string,

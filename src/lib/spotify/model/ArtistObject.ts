@@ -1,10 +1,12 @@
+
+
 export type ArtistObject = {
   external_urls?: ,
   followers?: ,
-  genres?: object,
+  genres?: ,
   href?: string,
   id?: string,
-  images?: object,
+  images?: ,
   name?: string,
   popularity?: number,
   type?: string,

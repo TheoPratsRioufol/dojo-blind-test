@@ -1,7 +1,9 @@
+
+
 export type TrackObject = {
   album?: ,
-  artists?: object,
-  available_markets?: object,
+  artists?: ,
+  available_markets?: ,
   disc_number?: number,
   duration_ms?: number,
   explicit?: boolean,

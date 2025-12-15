@@ -1,3 +1,5 @@
+
+
 export type SimplifiedArtistObject = {
   external_urls?: ,
   href?: string,

@@ -1,15 +1,17 @@
+
+
 export type ShowBase = {
-  available_markets: object,
-  copyrights: object,
+  available_markets: ,
+  copyrights: ,
   description: string,
   html_description: string,
   explicit: boolean,
   external_urls: ,
   href: string,
   id: string,
-  images: object,
+  images: ,
   is_externally_hosted: boolean,
-  languages: object,
+  languages: ,
   media_type: string,
   name: string,
   publisher: string,

@@ -27,40 +27,60 @@ function generateType(typeName, typeSchema) {
 }
 
 function getGeneratedCode(typeName, typeSchema) {
-  const generatedType = getGeneratedType(typeSchema);
-
-  return `export type ${typeName} = ${generatedType};`;
+  const [generatedType, localTypeToImports] = getGeneratedType(typeSchema);
+  let header = localTypeToImports != null ? Array.from(localTypeToImports).map((key) => `import { ${key} } from "./${key}";`).join('\n')+"\n\n" : ""
+  return `${header}export type ${typeName} = ${generatedType};`;
 }
 
 function getGeneratedType(typeSchema) {
   const schemaType = typeSchema.type;
+  let localTypeToImports = new Set();
 
   // TO DO: Generate typescript code from schema
   switch (schemaType) {
     case "number":
-      return "number"
+      return ["number", localTypeToImports]
+
     case "integer":
-      return "number"
+      return ["number", localTypeToImports]
+
     case "string":
-      return "string"
+      return ["string", localTypeToImports]
+
     case "boolean":
-      return "boolean"
+      return ["boolean", localTypeToImports]
+
     case "array":
+      return ["", localTypeToImports]
+
     case "object":
       if (Object.hasOwn(typeSchema, "properties")) {
         let out = "{\n"
         let requiredF = ""
+        let ptype = ""
         for (const propType of Object.keys(typeSchema.properties)) {
-          // Test if field if required
+          // Test if the field is required
           requiredF = (typeSchema.required != undefined) && typeSchema.required.includes(propType) ? "" : "?"
-          out += `  ${propType}${requiredF}: ${getGeneratedType(typeSchema.properties[propType])},\n`
+          // Test if the type if referenced to another
+          if (typeSchema.properties[propType]["$ref"] != undefined) {
+            ptype = typeSchema.properties[propType]["$ref"].split("/").at(-1)
+            localTypeToImports.add(ptype)
+          } else {
+            let [ptype2, tti] = getGeneratedType(typeSchema.properties[propType])
+            ptype = ptype2
+            if (tti != undefined) {
+              localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+            }
+          }
+          out += `  ${propType}${requiredF}: ${ptype},\n`
         }
         out += "}"
-        return out
+        return [out, localTypeToImports]
       }
-      return "object"
+      return ["object", localTypeToImports]
+
     default:
-      return "";
+      return ["", localTypeToImports]
   }
 }
 

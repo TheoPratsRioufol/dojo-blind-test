@@ -1,7 +1,9 @@
+
+
 export type AudiobookBase = {
-  authors: object,
-  available_markets: object,
-  copyrights: object,
+  authors: ,
+  available_markets: ,
+  copyrights: ,
   description: string,
   html_description: string,
   edition?: string,
@@ -9,11 +11,11 @@ export type AudiobookBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: object,
-  languages: object,
+  images: ,
+  languages: ,
   media_type: string,
   name: string,
-  narrators: object,
+  narrators: ,
   publisher: string,
   type: string,
   uri: string,

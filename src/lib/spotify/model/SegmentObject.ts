@@ -1,3 +1,5 @@
+
+
 export type SegmentObject = {
   start?: number,
   duration?: number,
@@ -6,6 +8,6 @@ export type SegmentObject = {
   loudness_max?: number,
   loudness_max_time?: number,
   loudness_end?: number,
-  pitches?: object,
-  timbre?: object,
+  pitches?: ,
+  timbre?: ,
 };

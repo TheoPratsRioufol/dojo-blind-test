@@ -1,3 +1,5 @@
+
+
 export type PlaylistObject = {
   collaborative?: boolean,
   description?: string,
@@ -5,7 +7,7 @@ export type PlaylistObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: object,
+  images?: ,
   name?: string,
   owner?: ,
   public?: boolean,

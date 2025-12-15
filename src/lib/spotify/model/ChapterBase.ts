@@ -1,6 +1,8 @@
+
+
 export type ChapterBase = {
   audio_preview_url: string,
-  available_markets?: object,
+  available_markets?: ,
   chapter_number: number,
   description: string,
   html_description: string,
@@ -9,9 +11,9 @@ export type ChapterBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: object,
+  images: ,
   is_playable: boolean,
-  languages: object,
+  languages: ,
   name: string,
   release_date: string,
   release_date_precision: string,

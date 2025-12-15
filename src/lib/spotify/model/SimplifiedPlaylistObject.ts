@@ -1,10 +1,12 @@
+
+
 export type SimplifiedPlaylistObject = {
   collaborative?: boolean,
   description?: string,
   external_urls?: ,
   href?: string,
   id?: string,
-  images?: object,
+  images?: ,
   name?: string,
   owner?: ,
   public?: boolean,
