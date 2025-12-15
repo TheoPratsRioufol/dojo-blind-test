@@ -7,7 +7,7 @@ export type AlbumBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: ImageObject[],
+  images: ImageObject[][],
   name: string,
   release_date: string,
   release_date_precision: string,

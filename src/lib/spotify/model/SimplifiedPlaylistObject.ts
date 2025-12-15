@@ -6,7 +6,7 @@ export type SimplifiedPlaylistObject = {
   external_urls?: ,
   href?: string,
   id?: string,
-  images?: ImageObject[],
+  images?: ImageObject[][],
   name?: string,
   owner?: ,
   public?: boolean,

@@ -6,7 +6,7 @@ export type PublicUserObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: ImageObject[],
+  images?: ImageObject[][],
   type?: string,
   uri?: string,
 };

@@ -11,7 +11,7 @@ export type ChapterBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: ImageObject[],
+  images: ImageObject[][],
   is_playable: boolean,
   languages: string[],
   name: string,

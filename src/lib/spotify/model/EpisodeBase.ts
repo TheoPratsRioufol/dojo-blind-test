@@ -9,7 +9,7 @@ export type EpisodeBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: ImageObject[],
+  images: ImageObject[][],
   is_externally_hosted: boolean,
   is_playable: boolean,
   language?: string,

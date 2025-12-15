@@ -9,7 +9,7 @@ export type PrivateUserObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: ImageObject[],
+  images?: ImageObject[][],
   product?: string,
   type?: string,
   uri?: string,

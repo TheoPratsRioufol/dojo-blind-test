@@ -11,6 +11,6 @@ export type SectionObject = {
   key_confidence?: number,
   mode?: number,
   mode_confidence?: number,
-  time_signature?: TimeSignature,
+  time_signature?: TimeSignature[],
   time_signature_confidence?: number,
 };

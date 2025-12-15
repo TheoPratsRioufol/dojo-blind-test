@@ -3,14 +3,14 @@ import { ImageObject } from "./ImageObject";
 
 export type ShowBase = {
   available_markets: string[],
-  copyrights: CopyrightObject[],
+  copyrights: CopyrightObject[][],
   description: string,
   html_description: string,
   explicit: boolean,
   external_urls: ,
   href: string,
   id: string,
-  images: ImageObject[],
+  images: ImageObject[][],
   is_externally_hosted: boolean,
   languages: string[],
   media_type: string,

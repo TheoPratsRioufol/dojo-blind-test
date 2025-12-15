@@ -4,9 +4,9 @@ import { ImageObject } from "./ImageObject";
 import { NarratorObject } from "./NarratorObject";
 
 export type AudiobookBase = {
-  authors: AuthorObject[],
+  authors: AuthorObject[][],
   available_markets: string[],
-  copyrights: CopyrightObject[],
+  copyrights: CopyrightObject[][],
   description: string,
   html_description: string,
   edition?: string,
@@ -14,11 +14,11 @@ export type AudiobookBase = {
   external_urls: ,
   href: string,
   id: string,
-  images: ImageObject[],
+  images: ImageObject[][],
   languages: string[],
   media_type: string,
   name: string,
-  narrators: NarratorObject[],
+  narrators: NarratorObject[][],
   publisher: string,
   type: string,
   uri: string,

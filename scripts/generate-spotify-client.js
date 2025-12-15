@@ -32,9 +32,32 @@ function getGeneratedCode(typeName, typeSchema) {
   return `${header}export type ${typeName} = ${generatedType};`;
 }
 
+
 function getGeneratedType(typeSchema) {
   const schemaType = typeSchema.type;
   let localTypeToImports = new Set();
+
+  if (typeSchema.$ref != undefined) {
+    // Handle Reference
+    console.log("REFERENCE")
+    let ptype = typeSchema["$ref"].split("/").at(-1)
+    localTypeToImports.add(ptype)
+    return [`${ptype}[]`, localTypeToImports]
+  }
+
+  if (typeSchema.oneOf != undefined) {
+    // Handle oneOff type
+    console.log("ONE OFF")
+    let oflist = new Array()
+    for (const oneOfType of typeSchema.oneOf) {
+      const [ptype2, tti] = getGeneratedType(oneOfType)
+      oflist.push(ptype2)
+      localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
+      }
+      console.log("Return:","("+oflist.join(" | ")+")")
+      return "("+oflist.join(" | ")+")", localTypeToImports
+    }
+
 
   // TO DO: Generate typescript code from schema
   switch (schemaType) {
@@ -51,50 +74,18 @@ function getGeneratedType(typeSchema) {
       return ["boolean", localTypeToImports]
 
     case "array":
-      if (typeSchema.items['type'] != undefined) {
-        return [`${typeSchema.items.type}[]`, localTypeToImports]
-      } else if (typeSchema.items['$ref'] != undefined) {
-        let ptype = typeSchema.items["$ref"].split("/").at(-1)
-        return [`${ptype}[]`, new Set([ptype])]
-      }
-      return ["", localTypeToImports]
+      const [ptype, tti] = getGeneratedType(typeSchema.items)
+      return [`${ptype}[]`, tti]
 
     case "object":
       if (Object.hasOwn(typeSchema, "properties")) {
         let out = "{\n"
         let requiredF = ""
-        let ptype = ""
         for (const propType of Object.keys(typeSchema.properties)) {
           // Test if the field is required
           requiredF = (typeSchema.required != undefined) && typeSchema.required.includes(propType) ? "" : "?"
-          
-          if (typeSchema.properties[propType]["$ref"] != undefined) {
-            // Test if the type if referenced to another
-            ptype = typeSchema.properties[propType]["$ref"].split("/").at(-1)
-            localTypeToImports.add(ptype)
-          } else if (Object.hasOwn(typeSchema.properties[propType], "oneOf")) {
-            // Check for Type Union
-            let oflist = new Array()
-            for (const oneOfType of typeSchema.properties[propType].oneOf) {
-              console.log(oneOfType)
-              if (oneOfType["$ref"] != undefined) {
-                ptype = oneOfType["$ref"].split("/").at(-1)
-                oflist.push(ptype)
-                localTypeToImports.add(ptype)
-              } else {
-                const [ptype2, tti] = getGeneratedType(oneOfType)
-                oflist.push(ptype2)
-                localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
-              }
-            }
-            return ["("+oflist.join(" | ")+")", localTypeToImports]
-          } else {
-            let [ptype2, tti] = getGeneratedType(typeSchema.properties[propType])
-            ptype = ptype2
-            if (tti != undefined) {
-              localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
-            }
-          }
+          const [ptype, tti] = getGeneratedType(typeSchema.properties[propType])
+          localTypeToImports = new Set([...localTypeToImports, ...tti]) // merge the import
           out += `  ${propType}${requiredF}: ${ptype},\n`
         }
         out += "}"

@@ -1,4 +1,22 @@
-import { TrackObject } from "./TrackObject";
-import { EpisodeObject } from "./EpisodeObject";
+import { E } from "./E";
+import { p } from "./p";
+import { i } from "./i";
+import { s } from "./s";
+import { o } from "./o";
+import { d } from "./d";
+import { e } from "./e";
+import { O } from "./O";
+import { b } from "./b";
+import { j } from "./j";
+import { c } from "./c";
+import { t } from "./t";
 
-export type CurrentlyPlayingObject = (TrackObject | EpisodeObject);
+export type CurrentlyPlayingObject = {
+  context?: ,
+  timestamp?: number,
+  progress_ms?: number,
+  is_playing?: boolean,
+  item?: TrackObject,
+  currently_playing_type?: string,
+  actions?: ,
+};

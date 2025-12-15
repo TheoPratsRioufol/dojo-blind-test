@@ -7,7 +7,7 @@ export type PlaylistObject = {
   followers?: ,
   href?: string,
   id?: string,
-  images?: ImageObject[],
+  images?: ImageObject[][],
   name?: string,
   owner?: ,
   public?: boolean,

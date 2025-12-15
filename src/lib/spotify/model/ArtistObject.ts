@@ -6,7 +6,7 @@ export type ArtistObject = {
   genres?: string[],
   href?: string,
   id?: string,
-  images?: ImageObject[],
+  images?: ImageObject[][],
   name?: string,
   popularity?: number,
   type?: string,
